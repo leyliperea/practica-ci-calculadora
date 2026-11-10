@@ -32,3 +32,18 @@ jobs:
         with:
           name: coverage-report
           path: coverage.xml
+
+      - name: Build proyecto
+        run: |
+          mkdir -p artefactos
+          cp calculadora.py artefactos/
+
+      - name: Generar ZIP
+        run: zip -r artefacto.zip artefactos
+
+      - name: Subir artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-python
+          path: artefacto.zip
+          if-no-files-found: error
